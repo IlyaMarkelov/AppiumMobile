@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.security.auth.login.Configuration;
 
+import java.util.Random;
+
 import static java.lang.String.format;
 
 
@@ -58,38 +60,15 @@ public class MainPageObject {
         return element;
     }
 
-    public static String generateRandomString(int lenght){
-        return RandomStringUtils.randomAlphabetic(lenght).toLowerCase();
+    public static String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr.toLowerCase();
     }
-
-    public static User getNewRandomUserProfile() {
-        Integer randomValueLength = 9;
-        User user = new User();
-        user.setFirstName(generateRandomString(randomValueLength));
-        user.setLastName(generateRandomString(randomValueLength));
-        return user;
-    }
-
-    private static String generateRandomEmailInternal(String emailTemplate) {
-        Integer randomPartLength = 9;
-        return format(emailTemplate, generateRandomString(randomPartLength));
-    }
-
-    public static String generateRandomYopmailEmail() {
-        return generateRandomEmailInternal("yopmail.email.template");
-    }
-
-    public static User getNewRandomUserProfileWithEmail() {
-        User user = getNewRandomUserProfile();
-        user.setEmail(generateRandomYopmailEmail());
-        return user;
-    }
-
-    public static User getNewRandomUserProfileWithEmailAndPassword() {
-        Integer randomValueLength = 9;
-        User user = getNewRandomUserProfileWithEmail();
-        user.setPassword(generateRandomString(randomValueLength));
-        return user;
-    }
-
 }

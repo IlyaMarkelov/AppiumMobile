@@ -9,6 +9,8 @@ import java.time.Duration;
 
 public class PersonalAccount extends MainPageObject {
 
+    private static final String FIRST_NAME_REGISTRATION_INPUT = "ru.webinar.mobile:id/etName";
+    private static final String LAST_NAME_REGISTRATION_INPUT = "ru.webinar.mobile:id/etSecondName";
     private static final String CHANGE_ACTION_BUTTON = "ru.webinar.mobile:id/tvChangeAction";
     private static final String EMAIL_INPUT = "ru.webinar.mobile:id/etEmail";
     private static final String PASSWORD_INPUT = "ru.webinar.mobile:id/etPassword";
@@ -91,7 +93,6 @@ public class PersonalAccount extends MainPageObject {
 
     public void findAndClickBackToCalendar(){
         this.waitForElementAndClick(By.xpath(BACK_TO_CALENDAR_BUTTON),"Cannot find and click change password button",5);
-        //driver.runAppInBackground(Duration.ofSeconds(10));
     }
 
     public String getArticleCompanyInput(String company_name){
@@ -111,4 +112,19 @@ public class PersonalAccount extends MainPageObject {
     public void findAndClearPositionInput(){
         this.waitElementAndClear(By.id(POSITION_INPUT),"Cannot find and clear into position input",5);
     }
+
+    public void findAndInputFirstRegistrationName(String first_name_line){
+        this.waitForElementAndSendKeys(By.id(FIRST_NAME_REGISTRATION_INPUT),first_name_line,"Cannot find and type into first name input",5);
+    }
+
+    public void findAndInputLastRegistrationName(String last_name_line){
+        this.waitForElementAndSendKeys(By.id(LAST_NAME_REGISTRATION_INPUT),last_name_line,"Cannot find and type into first name input",5);
+    }
+
+    public void findAndClickSignUpButton(){
+        driver.hideKeyboard();
+        this.waitForElementAndClick(By.id(LOG_IN_BUTTON),"Cannot find and click sign up button",5);
+    }
+
+
 }

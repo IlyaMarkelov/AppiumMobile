@@ -5,22 +5,32 @@ import appiumtests.lib.Models.User;
 import appiumtests.lib.UI.MainPageObject;
 import appiumtests.lib.UI.PersonalAccount;
 import org.junit.Test;
+import org.junit.runner.Request;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 
 public class MainTest extends CoreTestCase {
 
     private User user;
+    private String firstName = "Ilya";
+    private String lastName = "Markelov";
     private String email = "i.markelov@webinar.ru";
     private String password = "qwerty";
     private String newPassword = "qwerty123456";
     private String organization = "Webinar";
     private String position = "QA Engeener";
+    private String adminMailDomen = "@test.webinar.ru";
+    private String registrationEmail = MainPageObject.getSaltString() + adminMailDomen;
 
 
-    @BeforeTest
-    public void readParams(String fileToAttach, Integer tariffPeriod, String monthCount) {
-        user = MainPageObject.getNewRandomUserProfileWithEmailAndPassword();
+    @Test
+    public void testRegistrationNewAdmin(){
+        PersonalAccount personalAccount = new PersonalAccount(driver);
+        personalAccount.findAndInputFirstRegistrationName(firstName);
+        personalAccount.findAndInputLastRegistrationName(lastName);
+        personalAccount.inputEmailAndPassword(registrationEmail, password);
+        personalAccount.findAndClickSignUpButton();
+        personalAccount.findToolBarCalendarFrame();
     }
 
     //Login, LogOut
@@ -63,6 +73,7 @@ public class MainTest extends CoreTestCase {
         personalAccount.findAndClickLogOut();
     }
 
+    //Тест изменения данных в лк
     @Test
     public void testChangeTheData() {
 
@@ -91,8 +102,8 @@ public class MainTest extends CoreTestCase {
         personalAccount.findAndClearCompanyInput();
         personalAccount.findAndClearPositionInput();
         personalAccount.findAndClickBackToCalendar();
-        driver.closeApp();
-
+        personalAccount.findToolBarCalendarFrame();
+       // Request requestMail = new Request.Builder()
     }
 }
 
