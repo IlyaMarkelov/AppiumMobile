@@ -1,16 +1,18 @@
-package appiumtests.lib;
+package lib;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import junit.framework.TestCase;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
-public class CoreTestCase extends TestCase {
+public class AndroidTestCore extends TestCase {
 
     protected AppiumDriver driver;
-    private static String AppiumURL = "http://127.0.0.1:4723/wd/hub";
+    private static final String Appium_URL = "http://127.0.0.1:4723/wd/hub";
+
 
     @Override
     protected void setUp() throws  Exception {
@@ -25,7 +27,8 @@ public class CoreTestCase extends TestCase {
         capabilities.setCapability("automationName","Appium");
         capabilities.setCapability("app","/Users/ilya_markelov/Downloads/webinar_v2.1.8rc1.apk");
 
-        driver = new AndroidDriver(new URL(AppiumURL), capabilities);
+        driver = new AndroidDriver(new URL(Appium_URL), capabilities);
+        this.rotateScreenPortrait();
     }
 
     @Override
@@ -34,4 +37,7 @@ public class CoreTestCase extends TestCase {
         super.tearDown();
         driver.quit();
     }
+
+    protected  void rotateScreenPortrait() {driver.rotate(ScreenOrientation.PORTRAIT); }
+    protected  void rotateScreenLandscape() {driver.rotate(ScreenOrientation.LANDSCAPE);}
 }

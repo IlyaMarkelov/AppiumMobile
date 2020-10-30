@@ -1,34 +1,21 @@
-package appiumtests;
+package tests;
 
-import appiumtests.lib.CoreTestCase;
-import appiumtests.lib.Models.User;
-import appiumtests.lib.UI.MainPageObject;
-import appiumtests.lib.UI.PersonalAccount;
+import lib.AndroidTestCore;
+import lib.Models.User;
+import lib.UI.Android.AndroidPersonalAccount;
 import org.junit.Test;
-import org.junit.runner.Request;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 
-public class MainTest extends CoreTestCase {
+public class AndroidTests extends AndroidTestCore {
 
-    private User user;
-    private String firstName = "Ilya";
-    private String lastName = "Markelov";
-    private String email = "i.markelov@webinar.ru";
-    private String password = "qwerty";
-    private String newPassword = "qwerty123456";
-    private String organization = "Webinar";
-    private String position = "QA Engeener";
-    private String adminMailDomen = "@test.webinar.ru";
-    private String registrationEmail = MainPageObject.getSaltString() + adminMailDomen;
+    User user = new User();
 
-
+    //Registration new admin
     @Test
     public void testRegistrationNewAdmin(){
-        PersonalAccount personalAccount = new PersonalAccount(driver);
-        personalAccount.findAndInputFirstRegistrationName(firstName);
-        personalAccount.findAndInputLastRegistrationName(lastName);
-        personalAccount.inputEmailAndPassword(registrationEmail, password);
+        AndroidPersonalAccount personalAccount = new AndroidPersonalAccount(driver);
+        personalAccount.findAndInputFirstRegistrationName(user.firstName);
+        personalAccount.findAndInputLastRegistrationName(user.lastName);
+        personalAccount.inputEmailAndPassword(user.registrationEmail, user.password);
         personalAccount.findAndClickSignUpButton();
         personalAccount.findToolBarCalendarFrame();
     }
@@ -37,9 +24,9 @@ public class MainTest extends CoreTestCase {
     @Test
    public void testLogInAndLogOut(){
 
-       PersonalAccount personalAccount = new PersonalAccount((driver));
+       AndroidPersonalAccount personalAccount = new AndroidPersonalAccount((driver));
        personalAccount.findAndClickChangeAction();
-       personalAccount.inputEmailAndPassword(email, password);
+       personalAccount.inputEmailAndPassword(user.email, user.password);
        personalAccount.findAndClickLogIn();
        personalAccount.findToolBarCalendarFrame();
        personalAccount.findAndClickAvatar();
@@ -52,22 +39,22 @@ public class MainTest extends CoreTestCase {
     @Test
     public void testChangePassword(){
 
-        PersonalAccount personalAccount = new PersonalAccount((driver));
+        AndroidPersonalAccount personalAccount = new AndroidPersonalAccount((driver));
         personalAccount.findAndClickChangeAction();
-        personalAccount.inputEmailAndPassword(email, password);
+        personalAccount.inputEmailAndPassword(user.email, user.password);
         personalAccount.findAndClickLogIn();
         personalAccount.findAndClickAvatar();
         personalAccount.findAndClickChangePasswordBeforeInput();
-        personalAccount.inputOldAndNewPasswords(password,newPassword);
+        personalAccount.inputOldAndNewPasswords(user.password,user.newPassword);
         personalAccount.findAndClickChangePasswordAfterInput();
         personalAccount.findAndClickMoreOptions();
         personalAccount.findAndClickLogOut();
         personalAccount.findAndClickChangeAction();
-        personalAccount.inputEmailAndPassword(email,newPassword);
+        personalAccount.inputEmailAndPassword(user.email,user.newPassword);
         personalAccount.findAndClickLogIn();
         personalAccount.findAndClickAvatar();
         personalAccount.findAndClickChangePasswordBeforeInput();
-        personalAccount.inputOldAndNewPasswords(newPassword, password);
+        personalAccount.inputOldAndNewPasswords(user.newPassword, user.password);
         personalAccount.findAndClickChangePasswordAfterInput();
         personalAccount.findAndClickMoreOptions();
         personalAccount.findAndClickLogOut();
@@ -77,20 +64,20 @@ public class MainTest extends CoreTestCase {
     @Test
     public void testChangeTheData() {
 
-        PersonalAccount personalAccount = new PersonalAccount((driver));
+        AndroidPersonalAccount personalAccount = new AndroidPersonalAccount((driver));
         personalAccount.findAndClickChangeAction();
-        personalAccount.inputEmailAndPassword(email, password);
+        personalAccount.inputEmailAndPassword(user.email, user.password);
         personalAccount.findAndClickLogIn();
         personalAccount.findToolBarCalendarFrame();
         personalAccount.findAndClickAvatar();
-        personalAccount.findAndInputCompany(organization);
-        personalAccount.findAndInputPosition(position);
+        personalAccount.findAndInputCompany(user.organization);
+        personalAccount.findAndInputPosition(user.position);
         personalAccount.findAndClickBackToCalendar();
         personalAccount.findAndClickAvatar();
         personalAccount.findAndClickMoreOptions();
         personalAccount.findAndClickLogOut();
         personalAccount.findAndClickChangeAction();
-        personalAccount.inputEmailAndPassword(email, password);
+        personalAccount.inputEmailAndPassword(user.email, user.password);
         personalAccount.findAndClickLogIn();
         personalAccount.findAndClickAvatar();
 
@@ -103,7 +90,6 @@ public class MainTest extends CoreTestCase {
         personalAccount.findAndClearPositionInput();
         personalAccount.findAndClickBackToCalendar();
         personalAccount.findToolBarCalendarFrame();
-       // Request requestMail = new Request.Builder()
     }
 }
 
