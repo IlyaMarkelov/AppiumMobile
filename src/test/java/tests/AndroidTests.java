@@ -22,7 +22,7 @@ public class AndroidTests extends AndroidTestCore {
 
     //Login, LogOut
     @Test
-   public void testLogInAndLogOut(){
+    public void testLogInAndLogOut(){
 
        AndroidPersonalAccount personalAccount = new AndroidPersonalAccount((driver));
        personalAccount.findAndClickChangeAction();
@@ -81,7 +81,7 @@ public class AndroidTests extends AndroidTestCore {
         personalAccount.findAndClickLogIn();
         personalAccount.findAndClickAvatar();
 
-        //Доработать проверку
+        //TODO: доделать проверку
 //        String article_company_name = personalAccount.getArticleCompanyInput(organization);
 //        String article_position_name = personalAccount.getArticlePositionInput(position);
 //        Assert.assertEquals("We see unexpected company",organization,article_company_name);

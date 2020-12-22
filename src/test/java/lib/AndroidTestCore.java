@@ -23,9 +23,12 @@ public class AndroidTestCore extends TestCase {
 
         capabilities.setCapability("platformName","Android");
         capabilities.setCapability("deviceName","AndroidTestDevice");
-        capabilities.setCapability("platformVersion","9.0");
+        capabilities.setCapability("platformVersion","11.0");
+        capabilities.setCapability("appPackage","ru.webinar.mobile");
+        capabilities.setCapability("appActivity","UI.Activity.LoadingActivity");
         capabilities.setCapability("automationName","Appium");
-        capabilities.setCapability("app","/Users/ilya_markelov/Downloads/webinar_v2.1.8rc1.apk");
+        //capabilities.setCapability("noReset", false);
+        capabilities.setCapability("app","/Users/ilya_markelov/Downloads/webinar_v2.1.10rc3.apk");
 
         driver = new AndroidDriver(new URL(Appium_URL), capabilities);
         this.rotateScreenPortrait();

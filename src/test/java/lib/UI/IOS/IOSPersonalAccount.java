@@ -20,7 +20,7 @@ public class IOSPersonalAccount extends MainPageObject {
     private static final String OLD_PASSWORD_INPUT = "ru.webinar.mobile:id/etOldPassword";
     private static final String NEW_PASSWORD_INPUT = "ru.webinar.mobile:id/etNewPassword";
     private static final String CHANGE_PASSWORD_BUTTON_AFTER_INPUT = "ru.webinar.mobile:id/btnChangePassword";
-    private static final String REGISTER_FRAME = "id:To access the webinar calendar, enter your data, which you usually use to register for webinars";
+    private static final String REGISTER_FRAME = "xpath://XCUIElementTypeImage[@name='dark_background.png']";
     private static final String TOOLBAR_CALENDAR_FRAME = "xpath://XCUIElementTypeNavigationBar[@name='Calendar']";
     private static final String COMPANY_INPUT = "ru.webinar.mobile:id/etSettsOrganization";
     private static final String POSITION_INPUT = "ru.webinar.mobile:id/etSettsPosition";
@@ -45,8 +45,8 @@ public class IOSPersonalAccount extends MainPageObject {
     }
 
     public void inputEmailAndPasswordLogIn(String email_line, String password_line){
-        this.waitForElementAndSendKeys(EMAIL_INPUT,email_line,"Cannot find and type into email input",5);
-        this.waitForElementAndSendKeys(PASSWORD_INPUT,password_line, "Cannot find and type into password input",5);
+        this.waitForElementAndSendKeys(EMAIL_INPUT,email_line,"Cannot find and type into email input",15);
+        this.waitForElementAndSendKeys(PASSWORD_INPUT,password_line, "Cannot find and type into password input",15);
     }
 
     public void findAndClickLogIn(){
@@ -129,6 +129,5 @@ public class IOSPersonalAccount extends MainPageObject {
     public void findAndClickSignUpButton(){
         this.waitForElementAndClick(REGISTER_BUTTON,"Cannot find and click sign up button",5);
     }
-
 
 }

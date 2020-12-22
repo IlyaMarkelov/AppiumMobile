@@ -38,8 +38,8 @@ public class AndroidPersonalAccount extends MainPageObject {
     }
 
     public void inputEmailAndPassword(String email_line, String password_line){
-        this.waitForElementAndSendKeys(EMAIL_INPUT,email_line,"Cannot find and type into email input",5);
-        this.waitForElementAndSendKeys(PASSWORD_INPUT,password_line, "Cannot find and type into password input",5);
+        this.waitForElementAndSendKeys(EMAIL_INPUT,email_line,"Cannot find and type into email input",10);
+        this.waitForElementAndSendKeys(PASSWORD_INPUT,password_line, "Cannot find and type into password input",10);
     }
 
     public void findAndClickLogIn(){
